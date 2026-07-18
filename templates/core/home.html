@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - NOVA STORE{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-5">
+        <h2 class="section-title">Our Products</h2>
+        <p class="text-muted-nova">Discover the latest collections, modern style</p>
+    </div>
+
+    {% if products %}
+        <div class="row g-4">
+            {% for product in products %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card">
+                        <a href="{% url 'products:product_detail' product.pk %}">
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="price-tag mb-2">${{ product.price }}</p>
+
+                            {% if product.is_out_of_stock %}
+                                <p class="stock-out">Out of stock</p>
+                            {% elif product.is_low_stock %}
+                                <p class="stock-low">Only {{ product.stock }} left</p>
+                            {% endif %}
+
+                            <a href="{% url 'products:product_detail' product.pk %}" class="btn btn-nova-outline mt-auto">
+                                View details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted-nova">No products available right now.</p>
+    {% endif %}
+{% endblock %}

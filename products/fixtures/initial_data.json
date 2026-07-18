@@ -1,0 +1,56 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$SkVpLBnvdVPo79FMGa8QvR$9pVlxSGF7U5NC8LpMGom/1e4jU1EY1lZzq10rAtkfos=",
+    "last_login": "2026-07-17T22:50:37.877Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@example.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-17T22:29:41.637Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "name": "Cotton T-Shirt",
+    "description": "A comfortable, high-quality cotton t-shirt.",
+    "price": "29.99",
+    "image": "products/shirt.jpg",
+    "stock": 10,
+    "created_at": "2026-07-17T22:29:41.840Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "name": "Running Shoes",
+    "description": "Lightweight running shoes, perfect for jogging.",
+    "price": "69.50",
+    "image": "products/shoes.jpg",
+    "stock": 3,
+    "created_at": "2026-07-17T22:29:41.844Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "name": "Wristwatch",
+    "description": "An elegant wristwatch with a modern design.",
+    "price": "119.00",
+    "image": "products/watch.jpg",
+    "stock": 0,
+    "created_at": "2026-07-17T22:29:41.846Z"
+  }
+}
+]

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+    <h2 class="section-title mb-5">Shopping Cart</h2>
+
+    {% if cart|length > 0 %}
+        <div class="nova-panel p-0 overflow-hidden">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="{{ item.product.image.url }}" width="55" height="55" style="object-fit:cover;border-radius:10px;">
+                                    {{ item.product.name }}
+                                </div>
+                            </td>
+                            <td>${{ item.product.price }}</td>
+                            <td style="max-width: 130px;">
+                                <form action="{% url 'cart:cart_update' item.product.id %}" method="post" class="d-flex gap-1">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" class="form-control form-control-sm">
+                                    <button type="submit" class="btn btn-sm btn-nova-outline">Update</button>
+                                </form>
+                            </td>
+                            <td class="price-tag">${{ item.total_price }}</td>
+                            <td>
+                                <a href="{% url 'cart:cart_remove' item.product.id %}" class="btn btn-sm btn-nova-danger btn-remove-item">Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-end mt-4">
+            <h4>Total: <span class="price-tag">${{ cart.get_total_price }}</span></h4>
+            <a href="{% url 'cart:checkout' %}" class="btn btn-nova mt-2 px-5 py-2">Checkout</a>
+        </div>
+    {% else %}
+        <div class="nova-panel text-center py-5">
+            <p class="text-muted-nova mb-3">Your cart is currently empty.</p>
+            <a href="{% url 'core:home' %}" class="btn btn-nova">Browse products</a>
+        </div>
+    {% endif %}
+{% endblock %}

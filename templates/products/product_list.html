@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}All Products{% endblock %}
+
+{% block content %}
+    <h2 class="section-title mb-5">All Products</h2>
+    <div class="row g-4">
+        {% for product in products %}
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card product-card">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="price-tag mb-2">${{ product.price }}</p>
+                        <a href="{% url 'products:product_detail' product.pk %}" class="btn btn-nova-outline mt-auto">
+                            View details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted-nova">No products available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
